@@ -1,0 +1,30 @@
+import { customerApi } from "@/lib/api";
+import { Customer } from "@/lib/types";
+import { CustomerTable } from "@/components/customer/customer-table";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
+export default async function CustomersPage(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const { searchParams } = props;
+  const sp = await searchParams;
+  const { items: customers, totalCount } = await customerApi.getAll({
+    Filter: sp.Filter as string,
+    Sorting: sp.Sorting as string,
+    SkipCount: sp.SkipCount ? parseInt(sp.SkipCount as string) : undefined,
+    MaxResultCount: sp.MaxResultCount ? parseInt(sp.MaxResultCount as string) : undefined,
+  });
+
+  return (
+    <div className="flex flex-col space-y-4">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold">Customers</h1>
+        <Button asChild>
+          <Link href="/customer/new">Add Customer</Link>
+        </Button>
+      </div>
+      <CustomerTable customers={customers} totalCount={totalCount} />
+    </div>
+  );
+}
