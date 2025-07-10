@@ -1,3 +1,5 @@
+"use client"
+
 // src/components/data-table.tsx
 import {
   ColumnDef, // This is crucial for defining your columns with a generic type

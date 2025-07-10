@@ -25,11 +25,13 @@ export function generateStaticParams() {
 
 export default async function LocaleLayout({
   children,
-  params: { locale }
+  params
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  // استخدام params.locale مباشرة بدون استخراجه
+  const locale = params.locale;
   // التحقق من أن اللغة مدعومة
   if (!locales.includes(locale as any)) {
     notFound();
