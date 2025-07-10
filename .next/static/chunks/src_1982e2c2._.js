@@ -126,7 +126,7 @@ class ApiService {
     baseUrl;
     apiKey;
     constructor(){
-        this.baseUrl = ("TURBOPACK compile-time value", "http://localhost:3000") || '';
+        this.baseUrl = ("TURBOPACK compile-time value", "https://neosending.com/api") || '';
         this.apiKey = ("TURBOPACK compile-time value", "test_key_123") || '';
     }
     buildUrl(endpoint, params) {
@@ -142,14 +142,20 @@ class ApiService {
     async request(endpoint, config = {}) {
         const { params, ...requestConfig } = config;
         const url = this.buildUrl(endpoint, params);
+        // تحسين رؤوس الطلب لتتضمن المزيد من المعلومات للتوثيق
         const defaultConfig = {
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'text/plain',
+                'Accept': 'application/json',
                 'Authorization': `Bearer ${this.apiKey}`,
+                'X-Api-Key': this.apiKey,
+                'X-Requested-With': 'XMLHttpRequest',
                 ...requestConfig.headers
             },
-            ...requestConfig
+            ...requestConfig,
+            // إضافة خيارات إضافية للطلب
+            credentials: 'include',
+            mode: 'cors'
         };
         try {
             const response = await fetch(url, defaultConfig);
@@ -168,28 +174,29 @@ class ApiService {
     // طرق العملاء
     // هنا نحدد أن getCustomers ستعيد Promise<ApiResponse<CustomerListResponse>>
     async getCustomers(params) {
-        return this.request('/api/cretechsoft/Whatsapp/customer', {
+        // تحديث المسار ليتوافق مع هيكل API الصحيح
+        return this.request('/customer', {
             params
         });
     }
     // ... باقي الطرق (مثل getCustomer, createCustomer, إلخ) كما هي
     async getCustomer(id) {
-        return this.request(`/api/cretechsoft/Whatsapp/customer/${id}`);
+        return this.request(`/customer/${id}`);
     }
     async createCustomer(customerData) {
-        return this.request('/api/cretechsoft/Whatsapp/customer', {
+        return this.request('/customer', {
             method: 'POST',
             body: JSON.stringify(customerData)
         });
     }
     async updateCustomer(id, customerData) {
-        return this.request(`/api/cretechsoft/Whatsapp/customer/${id}`, {
+        return this.request(`/customer/${id}`, {
             method: 'PUT',
             body: JSON.stringify(customerData)
         });
     }
     async getCustomerBalance(customerId) {
-        return this.request('/api/cretechsoft/Whatsapp/customer/customer-balance', {
+        return this.request('/customer/customer-balance', {
             params: {
                 customerId
             }
@@ -197,76 +204,76 @@ class ApiService {
     }
     // طرق حسابات الجوال
     async getMobileAccounts(params) {
-        return this.request('/api/cretechsoft/Whatsapp/mobile-account', {
+        return this.request('/mobile-account', {
             params
         });
     }
     async createMobileAccount(accountData) {
-        return this.request('/api/cretechsoft/Whatsapp/mobile-account', {
+        return this.request('/mobile-account', {
             method: 'POST',
             body: JSON.stringify(accountData)
         });
     }
     async updateMobileAccount(id, accountData) {
-        return this.request(`/api/cretechsoft/Whatsapp/mobile-account/${id}`, {
+        return this.request(`/mobile-account/${id}`, {
             method: 'PUT',
             body: JSON.stringify(accountData)
         });
     }
     async deleteMobileAccount(id) {
-        return this.request(`/api/cretechsoft/Whatsapp/mobile-account/${id}`, {
+        return this.request(`/mobile-account/${id}`, {
             method: 'DELETE'
         });
     }
     async restartSession(params) {
-        return this.request('/api/cretechsoft/Whatsapp/mobile-account/restart-session', {
+        return this.request('/mobile-account/restart-session', {
             params
         });
     }
     async deleteSession(params) {
-        return this.request('/api/cretechsoft/Whatsapp/mobile-account/delete-session', {
+        return this.request('/mobile-account/delete-session', {
             params
         });
     }
     // طرق الاشتراكات
     async getSubscriptions(params) {
-        return this.request('/api/cretechsoft/Whatsapp/customer-subscription', {
+        return this.request('/customer-subscription', {
             params
         });
     }
     async createSubscription(subscriptionData) {
-        return this.request('/api/cretechsoft/Whatsapp/customer-subscription', {
+        return this.request('/customer-subscription', {
             method: 'POST',
             body: JSON.stringify(subscriptionData)
         });
     }
     async updateSubscription(id, subscriptionData) {
-        return this.request(`/api/cretechsoft/Whatsapp/customer-subscription/${id}`, {
+        return this.request(`/customer-subscription/${id}`, {
             method: 'PUT',
             body: JSON.stringify(subscriptionData)
         });
     }
     async deleteSubscription(id) {
-        return this.request(`/api/cretechsoft/Whatsapp/customer-subscription/${id}`, {
+        return this.request(`/customer-subscription/${id}`, {
             method: 'DELETE'
         });
     }
     async getCurrentPackage(customerId) {
-        return this.request('/api/cretechsoft/Whatsapp/customer-subscription/current-package', {
+        return this.request('/customer-subscription/current-package', {
             params: {
                 customerId
             }
         });
     }
     async searchCustomers(query) {
-        return this.request('/api/cretechsoft/Whatsapp/customer-subscription/customer-lookup', {
+        return this.request('/customer-subscription/customer-lookup', {
             params: {
                 query
             }
         });
     }
     async searchPackages(query) {
-        return this.request('/api/cretechsoft/Whatsapp/customer-subscription/package-lookup', {
+        return this.request('/customer-subscription/package-lookup', {
             params: {
                 query
             }
