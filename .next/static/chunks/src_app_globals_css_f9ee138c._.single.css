@@ -3273,7 +3273,7 @@
 }
 
 [data-state="collapsed"] + main[data-slot="sidebar-inset"] {
-  transition: margin-right .2s ease-linear, width .2s ease-linear;
+  transition: all .2s ease-in-out;
   margin-left: calc(var(--sidebar-width) * -1) !important;
   width: 100% !important;
 }

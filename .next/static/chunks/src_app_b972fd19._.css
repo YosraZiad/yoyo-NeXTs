@@ -19,7 +19,7 @@ header > div {
 
 /* [project]/src/app/rtl.css [app-client] (css) */
 [dir="rtl"] [data-slot="sidebar-container"] {
-  transition-property: right, left, width !important;
+  transition-property: all;
 }
 
 [dir="rtl"] [data-side="left"] {
@@ -41,8 +41,11 @@ header > div {
   transform: rotate(180deg) !important;
 }
 
+main[data-slot="sidebar-inset"] {
+  transition: all .3s ease-in-out;
+}
+
 [dir="rtl"] [data-state="collapsed"] + main[data-slot="sidebar-inset"] {
-  transition: margin-right .2s ease-linear, width .2s ease-linear;
   margin-right: calc(var(--sidebar-width) * -1) !important;
   width: 100% !important;
 }

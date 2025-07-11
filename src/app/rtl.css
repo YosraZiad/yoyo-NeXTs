@@ -1,6 +1,6 @@
 /* RTL specific styles for sidebar */
 [dir="rtl"] [data-slot="sidebar-container"] {
-  transition-property: right, left, width !important;
+  transition-property: all;
 }
 
 /* Reverse sidebar animation direction for RTL */
@@ -26,9 +26,12 @@
   transform: rotate(180deg) !important;
 }
 
+main[data-slot="sidebar-inset"] {
+  transition: all 0.3s ease-in-out;
+}
+
 /* Expand content when sidebar is collapsed in RTL */
 [dir="rtl"] [data-state="collapsed"] + main[data-slot="sidebar-inset"] {
   margin-right: calc(var(--sidebar-width) * -1) !important;
   width: 100% !important;
-  transition: margin-right 0.2s ease-linear, width 0.2s ease-linear;
 }
