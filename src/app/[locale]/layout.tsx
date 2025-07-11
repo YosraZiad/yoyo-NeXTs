@@ -9,6 +9,10 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar";
 
+// استيراد ملفات CSS
+import "../sidebar.css";
+import "../rtl.css";
+
 // تحميل رسائل اللغة المطلوبة
 async function getMessages(locale: string) {
   try {

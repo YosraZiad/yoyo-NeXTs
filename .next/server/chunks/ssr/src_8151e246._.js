@@ -662,6 +662,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$s
 ;
 ;
 ;
+;
+;
 // تحميل رسائل اللغة المطلوبة
 async function getMessages(locale) {
     try {
@@ -718,47 +720,47 @@ async function LocaleLayout({ children, params }) {
                                 variant: "inset"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/[locale]/layout.tsx",
-                                lineNumber: 63,
+                                lineNumber: 67,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$sidebar$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["SidebarInset"], {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$site$2d$header$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["SiteHeader"], {}, void 0, false, {
                                         fileName: "[project]/src/app/[locale]/layout.tsx",
-                                        lineNumber: 65,
+                                        lineNumber: 69,
                                         columnNumber: 17
                                     }, this),
                                     children
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/[locale]/layout.tsx",
-                                lineNumber: 64,
+                                lineNumber: 68,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/[locale]/layout.tsx",
-                        lineNumber: 55,
+                        lineNumber: 59,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/[locale]/layout.tsx",
-                    lineNumber: 54,
+                    lineNumber: 58,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/[locale]/layout.tsx",
-                lineNumber: 48,
+                lineNumber: 52,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/[locale]/layout.tsx",
-            lineNumber: 47,
+            lineNumber: 51,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/[locale]/layout.tsx",
-        lineNumber: 46,
+        lineNumber: 50,
         columnNumber: 5
     }, this);
 }

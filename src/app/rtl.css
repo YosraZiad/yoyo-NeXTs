@@ -1,0 +1,34 @@
+/* RTL specific styles for sidebar */
+[dir="rtl"] [data-slot="sidebar-container"] {
+  transition-property: right, left, width !important;
+}
+
+/* Reverse sidebar animation direction for RTL */
+[dir="rtl"] [data-side="left"] {
+  right: 0 !important;
+  left: auto !important;
+}
+
+[dir="rtl"]
+  [data-state="collapsed"][data-collapsible="offcanvas"]
+  [data-slot="sidebar-container"] {
+  right: calc(var(--sidebar-width) * -1) !important;
+  left: auto !important;
+}
+
+/* Fix sidebar gap for RTL */
+[dir="rtl"] [data-slot="sidebar-gap"] {
+  transform: rotate(0) !important;
+  width: 0 !important;
+}
+
+[dir="rtl"] [data-side="right"][data-slot="sidebar-gap"] {
+  transform: rotate(180deg) !important;
+}
+
+/* Expand content when sidebar is collapsed in RTL */
+[dir="rtl"] [data-state="collapsed"] + main[data-slot="sidebar-inset"] {
+  margin-right: calc(var(--sidebar-width) * -1) !important;
+  width: 100% !important;
+  transition: margin-right 0.2s ease-linear, width 0.2s ease-linear;
+}

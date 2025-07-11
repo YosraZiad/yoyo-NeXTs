@@ -119,3 +119,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Expand content when sidebar is collapsed in RTL */
+[data-state="collapsed"] + main[data-slot="sidebar-inset"] {
+  margin-left: calc(var(--sidebar-width) * -1) !important;
+  width: 100% !important;
+  transition: margin-right 0.2s ease-linear, width 0.2s ease-linear;
+}

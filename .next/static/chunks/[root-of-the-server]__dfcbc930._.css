@@ -3366,6 +3366,12 @@
   --sidebar-ring: oklch(.556 0 0);
 }
 
+[data-state="collapsed"] + main[data-slot="sidebar-inset"] {
+  transition: margin-right .2s ease-linear, width .2s ease-linear;
+  margin-left: calc(var(--sidebar-width) * -1) !important;
+  width: 100% !important;
+}
+
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;
