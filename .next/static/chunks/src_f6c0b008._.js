@@ -298,31 +298,49 @@ class ApiService {
     // هنا نحدد أن getCustomers ستعيد Promise<ApiResponse<CustomerListResponse>>
     async getCustomers(params) {
         try {
-            // محاولة الاتصال بـ API الحقيقي
-            console.log("جاري محاولة الاتصال بـ API الحقيقي...");
-            const response = await this.request("/customer", {
-                params
-            });
-            // إذا نجح الاتصال، أرجع البيانات الحقيقية
-            if (response.success && response.data) {
-                const data = response.data;
-                if (data.items && data.items.length > 0) {
-                    console.log("تم الحصول على بيانات العملاء من API");
-                    return {
-                        success: true,
-                        data: data
-                    };
+            // استخدام رابط NeoSending API مباشرة
+            console.log("جاري محاولة الاتصال بـ NeoSending API...");
+            const neoSendingUrl = "api/neosending/Whatsapp/customer";
+            const response = await fetch(neoSendingUrl, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${this.apiKey}`,
+                    "X-Api-Key": this.apiKey
                 }
+            });
+            if (response.ok) {
+                const rawData = await response.json();
+                console.log("تم الحصول على بيانات العملاء من NeoSending API", rawData);
+                // تحويل البيانات من تنسيق NeoSending API إلى التنسيق المتوقع في التطبيق
+                const formattedData = {
+                    items: Array.isArray(rawData) ? rawData.map((customer, index)=>({
+                            id: customer.id || index + 1,
+                            creationTime: customer.creationTime || new Date().toISOString(),
+                            creatorId: customer.creatorId || "",
+                            lastModificationTime: customer.lastModificationTime || new Date().toISOString(),
+                            lastModifierId: customer.lastModifierId || "",
+                            isDeleted: customer.isDeleted || false,
+                            deleterId: customer.deleterId || "",
+                            deletionTime: customer.deletionTime || "",
+                            fullName: customer.name || customer.fullName || "",
+                            companyName: customer.company || customer.companyName || "",
+                            mobileNumber: customer.phone || customer.mobileNumber || "",
+                            masterMobileNumber: customer.masterMobileNumber || customer.phone || ""
+                        })) : [],
+                    totalCount: Array.isArray(rawData) ? rawData.length : 0
+                };
+                return {
+                    success: true,
+                    data: formattedData
+                };
+            } else {
+                console.error("فشل في الاتصال بـ NeoSending API:", response.statusText);
+                throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
             }
-            // إذا فشل الاتصال أو لم تكن هناك بيانات، استخدم البيانات الوهمية
-            console.log("استخدام البيانات الوهمية للعملاء");
-            const mockData = this.getMockCustomers();
-            return {
-                success: true,
-                data: mockData
-            };
         } catch (error) {
-            console.error("خطأ في جلب بيانات العملاء:", error);
+            console.error("خطأ في جلب بيانات العملاء من NeoSending API:", error);
             // في حالة الخطأ، استخدم البيانات الوهمية
             console.log("استخدام البيانات الوهمية للعملاء بسبب خطأ");
             const mockData = this.getMockCustomers();
