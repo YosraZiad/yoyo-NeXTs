@@ -4,6 +4,8 @@ import { locales } from '../../i18n';
 import { ThemeProvider } from "@/components/theme-provider";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
+import { Toaster } from "@/components/ui/toaster";
+import { AuthProvider } from "@/components/auth-provider";
 import {
   SidebarInset,
   SidebarProvider,
@@ -34,8 +36,9 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // استخدام params.locale مباشرة بدون استخراجه
-  const locale = params.locale;
+  // استخراج اللغة من params
+  const { locale } = params;
+  
   // التحقق من أن اللغة مدعومة
   if (!locales.includes(locale as any)) {
     notFound();
@@ -56,21 +59,24 @@ export default async function LocaleLayout({
           disableTransitionOnChange
         >
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <SidebarProvider
-              style={
-                {
-                  "--sidebar-width": "calc(var(--spacing) * 72)",
-                  "--header-height": "calc(var(--spacing) * 12)",
-                } as React.CSSProperties
-              }
-            >
-              <AppSidebar variant="inset" />
-              <SidebarInset>
-                <SiteHeader />
-                {children}
-              </SidebarInset>
-            </SidebarProvider>
+            <AuthProvider>
+              <SidebarProvider
+                style={
+                  {
+                    "--sidebar-width": "calc(var(--spacing) * 72)",
+                    "--header-height": "calc(var(--spacing) * 12)",
+                  } as React.CSSProperties
+                }
+              >
+                <AppSidebar variant="inset" />
+                <SidebarInset>
+                  <SiteHeader />
+                  {children}
+                </SidebarInset>
+              </SidebarProvider>
+            </AuthProvider>
           </NextIntlClientProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

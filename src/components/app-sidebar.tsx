@@ -11,6 +11,8 @@ import {
   IconListDetails,
   IconSearch,
   IconSettings,
+  IconBrandWhatsapp,
+  IconMessage,
 } from "@tabler/icons-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -52,6 +54,16 @@ const locale = useLocale()
     title: t("navMain.mobile-accounts"),
     url: "/mobile-accounts",
     icon: IconFolder,
+  },
+  {
+    title: "جلسات WhatsApp",
+    url: "/sessions",
+    icon: IconBrandWhatsapp,
+  },
+  {
+    title: "رسائل WhatsApp",
+    url: "/messages",
+    icon: IconMessage,
   },
     ],
     navSecondary: [

@@ -16,7 +16,6 @@ header > div {
   display: flex;
 }
 
-
 /* [project]/src/app/rtl.css [app-client] (css) */
 [dir="rtl"] [data-slot="sidebar-container"] {
   transition-property: all;
@@ -49,6 +48,5 @@ main[data-slot="sidebar-inset"] {
   margin-right: calc(var(--sidebar-width) * -1) !important;
   width: 100% !important;
 }
-
 
 /*# sourceMappingURL=src_app_b972fd19._.css.map*/

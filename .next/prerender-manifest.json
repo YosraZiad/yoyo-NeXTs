@@ -1,0 +1,1 @@
+{"version":4,"routes":{"/en/login":{},"/ar/login":{}},"dynamicRoutes":{"/[locale]/login":{"fallback":null}},"notFoundRoutes":[],"preview":{"previewModeId":"24f20cd6a958c88744adea49794bf4f8","previewModeSigningKey":"478cb104c64ed7938caa91d65097c7e39e74f8bc419388357e6974cacff65afb","previewModeEncryptionKey":"e9f31642dcff0cac0f17397d27756d300594bf1f55c999d3e113797600cfe243"}}

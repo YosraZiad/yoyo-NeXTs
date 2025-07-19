@@ -1,8 +1,8 @@
 // next-intl.config.js
-const { locales } = require('./i18n');
+const { locales, defaultLocale } = require('./src/i18n');
 
 module.exports = {
   locales,
-  defaultLocale: 'en',
+  defaultLocale,
   // يمكنك إضافة المزيد من الإعدادات هنا
 };
